@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { toast } from "sonner";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -8,6 +9,12 @@ const queryClient = new QueryClient({
       retry: 1,
       refetchOnWindowFocus: false,
       staleTime: 60 * 1000,
+    },
+    mutations: {
+      onError: (error: unknown) => {
+        toast.error("Operation failed.");
+        console.error("Mutation Error:", error);
+      },
     },
   },
 });

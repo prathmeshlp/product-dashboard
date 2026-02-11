@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { authService } from "@/services/auth.service";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 type LoginForm = z.infer<typeof loginSchema>;
 
@@ -22,15 +23,22 @@ const LoginPage = () => {
     resolver: zodResolver(loginSchema),
   });
 
+  console.log(errors, "errors");
   const onSubmit = async (data: LoginForm) => {
-    const response = await authService.login({
-      username: data.username,
-      password: data.password,
-      expiresInMins: 1,
-    });
+    try {
+      const response = await authService.login({
+        username: data.username,
+        password: data.password,
+        expiresInMins: 1,
+      });
 
-    login(response);
-    navigate("/");
+      login(response);
+      navigate("/");
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Invalid credentials",
+      );
+    }
   };
 
   return (

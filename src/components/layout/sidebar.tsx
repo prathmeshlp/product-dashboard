@@ -29,7 +29,7 @@ const Sidebar = () => {
     >
       <div className="flex h-16 items-center justify-between px-4">
         {!collapsed && <span className="font-bold">Admin</span>}
-        <button className="text-2xl" onClick={toggleSidebar}>
+        <button className="text-2xl cursor-pointer" onClick={toggleSidebar}>
           <GiHamburgerMenu />
         </button>
       </div>

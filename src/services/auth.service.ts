@@ -8,6 +8,7 @@ export const authService = {
       AUTH_ENDPOINTS.LOGIN,
       payload,
     );
+    console.log(response,"response")
     return response.data;
   },
 };

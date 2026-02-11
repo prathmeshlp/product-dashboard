@@ -12,6 +12,7 @@ interface Props {
 }
 
 const TopRatedProducts = ({ data }: Props) => {
+  console.log(data,"toprated");
   return (
     <ResponsiveContainer width="100%" height={300}>
       <BarChart data={data} layout="vertical">

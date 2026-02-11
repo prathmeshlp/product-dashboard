@@ -3,7 +3,7 @@ import StatsCard from "@/components/dashboard/stats-card";
 import ProductsByCategory from "@/components/dashboard/products-by-category";
 import TopRatedProducts from "@/components/dashboard/top-rated-products";
 import { calculateDashboardStats } from "@/lib/dashboard-utils";
-import type { Product } from "@/types/product.types";
+import type { Product, ProductCategory } from "@/types/product.types";
 
 const DashboardPage = () => {
   const { productsQuery, usersQuery, categoriesQuery, isLoading } =
@@ -15,19 +15,22 @@ const DashboardPage = () => {
 
   const products = productsQuery.data?.products ?? [];
   const usersTotal = usersQuery.data?.total ?? 0;
-  const categories = categoriesQuery.data ?? [];
+  const categories = (categoriesQuery.data ?? []) as unknown as ProductCategory[];
+  
+  console.log(categories,"categories")
 
   const stats = calculateDashboardStats(
     products,
     usersTotal,
     categories.length,
   );
-
-  const productsByCategory = categories.map((cat) => ({
-    name: cat,
-    value: products.filter((p: Product) => p.category === cat).length,
+  console.log(products,"products")
+  const productsByCategory = categories.map((cat:ProductCategory) => ({
+    name: cat.name,
+    value: products.filter((p: Product) => p.category === cat.slug).length,
   }));
 
+  console.log(productsByCategory,"procat");
   const topRatedProducts = [...products]
     .sort((a: Product, b: Product) => b.rating - a.rating)
     .slice(0, 10)
