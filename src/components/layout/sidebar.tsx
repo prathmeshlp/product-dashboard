@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import clsx from "clsx";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const navItems = [
   { label: "Dashboard", path: "/" },
@@ -11,7 +12,7 @@ const navItems = [
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(
-    localStorage.getItem("sidebar-collapsed") === "true"
+    localStorage.getItem("sidebar-collapsed") === "true",
   );
 
   const toggleSidebar = () => {
@@ -23,15 +24,17 @@ const Sidebar = () => {
     <aside
       className={clsx(
         "border-r bg-background transition-all duration-300",
-        collapsed ? "w-16" : "w-64"
+        collapsed ? "w-16" : "w-64",
       )}
     >
       <div className="flex h-16 items-center justify-between px-4">
         {!collapsed && <span className="font-bold">Admin</span>}
-        <button onClick={toggleSidebar}>☰</button>
+        <button className="text-2xl" onClick={toggleSidebar}>
+          <GiHamburgerMenu />
+        </button>
       </div>
 
-      <nav className="space-y-1 px-2">
+      <nav className={clsx("space-y-1 px-2", collapsed ? "hidden" : "block")}>
         {navItems.map((item) => (
           <NavLink
             key={item.path}
@@ -41,7 +44,7 @@ const Sidebar = () => {
                 "block rounded px-3 py-2 text-sm",
                 isActive
                   ? "bg-primary text-primary-foreground"
-                  : "hover:bg-muted"
+                  : "hover:bg-muted",
               )
             }
           >
