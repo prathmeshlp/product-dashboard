@@ -42,7 +42,7 @@ const LoginPage = () => {
         <h1 className="text-xl font-semibold">Login</h1>
 
         <div>
-          <Input placeholder="Username" {...register("username")} />
+          <Input placeholder="Username" autoComplete="username" {...register("username")} />
           {errors.username && (
             <p className="text-sm text-red-500">
               {errors.username.message}
@@ -54,6 +54,7 @@ const LoginPage = () => {
           <Input
             type="password"
             placeholder="Password"
+            autoComplete="password"
             {...register("password")}
           />
           {errors.password && (

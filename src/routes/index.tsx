@@ -3,9 +3,10 @@ import ProtectedRoute from "./protectedRoute";
 import AppLayout from "@/components/layout/app-layout";
 import LoginPage from "@/pages/login";
 import DashboardPage from "@/pages/dashboard";
+import ProductsPage from "@/pages/products";
 
-const Dashboard = () => <div>Dashboard Page</div>;
-const Products = () => <div>Products Page</div>;
+// const Dashboard = () => <div>Dashboard Page</div>;
+// const Products = () => <div>Products Page</div>;
 const Users = () => <div>Users Page</div>;
 const Settings = () => <div>Settings Page</div>;
 
@@ -13,29 +14,7 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
-
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <AppLayout>
-                <Dashboard />
-              </AppLayout>
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/products"
-          element={
-            <ProtectedRoute>
-              <AppLayout>
-                <Products />
-              </AppLayout>
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/login" element={<LoginPage />} />      
 
         <Route
           path="/users"
@@ -64,6 +43,16 @@ const Router = () => {
             <ProtectedRoute>
               <AppLayout>
                 <DashboardPage />
+              </AppLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/products"
+          element={
+            <ProtectedRoute>
+              <AppLayout>
+                <ProductsPage />
               </AppLayout>
             </ProtectedRoute>
           }
