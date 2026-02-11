@@ -45,8 +45,8 @@ const ProductsPage = () => {
         >
           <option value="">All Categories</option>
           {categoriesQuery.data?.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
+            <option key={cat.slug} value={cat.slug}>
+              {cat.name}
             </option>
           ))}
         </select>

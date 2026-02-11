@@ -1,6 +1,7 @@
 import { apiClient } from "@/lib/api-client";
 import { type ApiResponse } from "@/types/api.types";
 import { type Product } from "@/types/product.types";
+import { type ProductCategory } from "@/types/product.types";
 
 interface ProductQueryParams {
   page: number;
@@ -38,8 +39,8 @@ export const productService = {
     return res.data;
   },
 
-  getCategories: async (): Promise<string[]> => {
-    const res = await apiClient.get<string[]>("/products/categories");
+  getCategories: async (): Promise<ProductCategory[]> => {
+    const res = await apiClient.get<ProductCategory[]>("/products/categories");
     return res.data;
   },
 };
