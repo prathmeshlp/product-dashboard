@@ -39,6 +39,21 @@ export const productService = {
     return res.data;
   },
 
+  createProduct: async (data: Partial<Product>) => {
+    const res = await apiClient.post("/products/add", data);
+    return res.data;
+  },
+
+  updateProduct: async (id: number, data: Partial<Product>) => {
+    const res = await apiClient.put(`/products/${id}`, data);
+    return res.data;
+  },
+
+  deleteProduct: async (id: number) => {
+    const res = await apiClient.delete(`/products/${id}`);
+    return res.data;
+  },
+
   getCategories: async (): Promise<ProductCategory[]> => {
     const res = await apiClient.get<ProductCategory[]>("/products/categories");
     return res.data;
