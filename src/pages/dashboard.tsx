@@ -17,20 +17,17 @@ const DashboardPage = () => {
   const usersTotal = usersQuery.data?.total ?? 0;
   const categories = (categoriesQuery.data ?? []) as unknown as ProductCategory[];
   
-  console.log(categories,"categories")
 
   const stats = calculateDashboardStats(
     products,
     usersTotal,
     categories.length,
   );
-  console.log(products,"products")
   const productsByCategory = categories.map((cat:ProductCategory) => ({
     name: cat.name,
     value: products.filter((p: Product) => p.category === cat.slug).length,
   }));
 
-  console.log(productsByCategory,"procat");
   const topRatedProducts = [...products]
     .sort((a: Product, b: Product) => b.rating - a.rating)
     .slice(0, 10)

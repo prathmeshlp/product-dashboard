@@ -7,6 +7,7 @@ import {
 } from "react";
 import { type AuthResponse } from "@/types/auth.types";
 import { tokenStorage } from "@/lib/token";
+import { useNavigate } from "react-router-dom";
 
 interface AuthContextType {
   user: Omit<AuthResponse, "accessToken" | "refreshToken"> | null;
@@ -17,8 +18,8 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] =
-    useState<AuthContextType["user"]>(null);
+  const [user, setUser] = useState<AuthContextType["user"]>(null);
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -41,7 +42,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     tokenStorage.clearTokens();
     setUser(null);
-    window.location.href = "/login";
+    navigate("/login");
   };
 
   return (
