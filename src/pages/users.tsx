@@ -22,18 +22,22 @@ const UsersPage = () => {
 
   if (isLoading) return <div>Loading users...</div>;
 
-  return (
-    <div className="space-y-4">
-      <Input
-        placeholder="Search users..."
-        value={search}
-        onChange={(e) => {
-          setSearch(e.target.value);
-          setPage(1);
-        }}
-      />
+return (
+  <div className="space-y-4">
 
-      <table className="w-full border">
+    {/* Search */}
+    <Input
+      placeholder="Search users..."
+      value={search}
+      onChange={(e) => {
+        setSearch(e.target.value);
+        setPage(1);
+      }}
+    />
+
+    {/* Desktop Table */}
+    <div className="hidden md:block">
+      <table className="w-full border rounded-lg overflow-hidden">
         <thead>
           <tr className="bg-muted text-left">
             <th className="p-2">Avatar</th>
@@ -48,7 +52,7 @@ const UsersPage = () => {
           {users.map((user) => (
             <tr
               key={user.id}
-              className="border-t cursor-pointer"
+              className="border-t cursor-pointer hover:bg-muted/50"
               onClick={() => setSelectedUser(user)}
             >
               <td className="p-2">
@@ -67,40 +71,85 @@ const UsersPage = () => {
           ))}
         </tbody>
       </table>
-
-      <div className="flex justify-end gap-2">
-        <button disabled={page === 1} onClick={() => setPage(page - 1)}>
-          Prev
-        </button>
-        <span>
-          Page {page} / {Math.ceil(total / PAGE_SIZE)}
-        </span>
-        <button
-          disabled={page >= total / PAGE_SIZE}
-          onClick={() => setPage(page + 1)}
-        >
-          Next
-        </button>
-      </div>
-
-      {/* User Detail Modal */}
-      <Dialog open={!!selectedUser} onOpenChange={() => setSelectedUser(null)}>
-        <DialogContent>
-          {selectedUser && (
-            <div className="space-y-2">
-              <h2 className="text-lg font-semibold">
-                {selectedUser.firstName} {selectedUser.lastName}
-              </h2>
-              <p>Email: {selectedUser.email}</p>
-              <p>Phone: {selectedUser.phone}</p>
-              <p>Address: {selectedUser.address.address}</p>
-              <p>Company: {selectedUser.company.name}</p>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
     </div>
-  );
-};
+
+    {/* Mobile Cards */}
+    <div className="md:hidden space-y-4">
+      {users.map((user) => (
+        <div
+          key={user.id}
+          className="border rounded-xl p-4 shadow-sm cursor-pointer hover:shadow-md transition"
+          onClick={() => setSelectedUser(user)}
+        >
+          <div className="flex items-center gap-3 mb-3">
+            <img
+              src={user.image}
+              alt={user.firstName}
+              className="w-12 h-12 rounded-full"
+            />
+            <div>
+              <h3 className="font-semibold">
+                {user.firstName} {user.lastName}
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                {user.company.name}
+              </p>
+            </div>
+          </div>
+
+          <div className="space-y-1 text-sm">
+            <p><span className="font-medium">Email:</span> {user.email}</p>
+            <p><span className="font-medium">Phone:</span> {user.phone}</p>
+            <p><span className="font-medium">City:</span> {user.address.city}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* Pagination */}
+    <div className="flex justify-center gap-2">
+      <button
+        disabled={page === 1}
+        onClick={() => setPage(page - 1)}
+      >
+        Prev
+      </button>
+
+      <span>
+        Page {page} / {Math.ceil(total / PAGE_SIZE)}
+      </span>
+
+      <button
+        disabled={page >= total / PAGE_SIZE}
+        onClick={() => setPage(page + 1)}
+      >
+        Next
+      </button>
+    </div>
+
+    {/* User Detail Modal */}
+    <Dialog
+      open={!!selectedUser}
+      onOpenChange={(isOpen) => {
+        if (!isOpen) setSelectedUser(null);
+      }}
+    >
+      <DialogContent>
+        {selectedUser && (
+          <div className="space-y-2">
+            <h2 className="text-lg font-semibold">
+              {selectedUser.firstName} {selectedUser.lastName}
+            </h2>
+            <p>Email: {selectedUser.email}</p>
+            <p>Phone: {selectedUser.phone}</p>
+            <p>Address: {selectedUser.address.address}</p>
+            <p>Company: {selectedUser.company.name}</p>
+          </div>
+        )}
+      </DialogContent>
+    </Dialog>
+
+  </div>
+);};
 
 export default UsersPage;

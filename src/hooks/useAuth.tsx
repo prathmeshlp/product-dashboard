@@ -17,12 +17,18 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<AuthContextType["user"]>(null);
+  const [user, setUser] =
+    useState<AuthContextType["user"]>(null);
+
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const storedUser = tokenStorage.getUser();
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (storedUser) setUser(storedUser);
+    if (storedUser) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setUser(storedUser);
+    }
+    setIsLoading(false);
   }, []);
 
   const login = (data: AuthResponse) => {
@@ -40,7 +46,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
+      {!isLoading && children}
     </AuthContext.Provider>
   );
 };

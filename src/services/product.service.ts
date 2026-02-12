@@ -41,6 +41,7 @@ export const productService = {
 
   createProduct: async (data: Partial<Product>) => {
     const res = await apiClient.post("/products/add", data);
+    console.log(res.data);  
     return res.data;
   },
 

@@ -1,15 +1,12 @@
-import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 
 const SettingsPage = () => {
-  const { theme, setTheme } = useTheme();
-
   const [pageSize, setPageSize] = useState(
-    Number(localStorage.getItem("page-size") ?? 10)
+    Number(localStorage.getItem("page-size") ?? 10),
   );
 
   const [density, setDensity] = useState(
-    localStorage.getItem("density") ?? "comfortable"
+    localStorage.getItem("density") ?? "comfortable",
   );
 
   useEffect(() => {
@@ -24,29 +21,13 @@ const SettingsPage = () => {
     <div className="space-y-6 max-w-md">
       <h1 className="text-xl font-semibold">Settings</h1>
 
-      {/* Theme */}
-      <div>
-        <label className="block text-sm font-medium mb-1">
-          Theme
-        </label>
-        <select
-          className="border rounded px-2 w-full"
-          value={theme}
-          onChange={(e) => setTheme(e.target.value)}
-        >
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
-          <option value="system">System</option>
-        </select>
-      </div>
-
       {/* Page Size */}
       <div>
         <label className="block text-sm font-medium mb-1">
           Default Page Size
         </label>
         <select
-          className="border rounded px-2 w-full"
+          className="border rounded p-2 w-full bg-black text-white"
           value={pageSize}
           onChange={(e) => setPageSize(Number(e.target.value))}
         >
@@ -58,11 +39,9 @@ const SettingsPage = () => {
 
       {/* Density */}
       <div>
-        <label className="block text-sm font-medium mb-1">
-          Table Density
-        </label>
+        <label className="block text-sm font-medium mb-1">Table Density</label>
         <select
-          className="border rounded px-2 w-full"
+          className="border rounded p-2 w-full bg-black text-white"
           value={density}
           onChange={(e) => setDensity(e.target.value)}
         >
@@ -75,4 +54,3 @@ const SettingsPage = () => {
 };
 
 export default SettingsPage;
-

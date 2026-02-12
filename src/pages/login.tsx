@@ -23,7 +23,6 @@ const LoginPage = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  console.log(errors, "errors");
   const onSubmit = async (data: LoginForm) => {
     try {
       const response = await authService.login({

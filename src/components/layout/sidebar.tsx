@@ -24,10 +24,12 @@ const Sidebar = () => {
     <aside
       className={clsx(
         "border-r bg-background transition-all duration-300",
-        collapsed ? "w-16" : "w-64",
+        collapsed ? "w-12 border-2 relative h-full" : "w-64 absolute h-full z-10",
       )}
     >
-      <div className="flex h-16 items-center justify-between px-4">
+      <div
+        className={`flex h-16 items-center ${collapsed ? "justify-center" : "justify-between"} px-4`}
+      >
         {!collapsed && <span className="font-bold">Admin</span>}
         <button className="text-2xl cursor-pointer" onClick={toggleSidebar}>
           <GiHamburgerMenu />
@@ -47,6 +49,7 @@ const Sidebar = () => {
                   : "hover:bg-muted",
               )
             }
+            onClick={toggleSidebar}
           >
             {item.label}
           </NavLink>

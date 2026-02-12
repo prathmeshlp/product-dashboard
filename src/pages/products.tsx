@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import ProductForm from "@/components/products/product-form";
 import ProductDeleteDialog from "@/components/products/product-delete-dialog";
+import ProductCard from "@/components/common/common/productCard";
 
 const PAGE_SIZE = 10;
 
@@ -64,48 +65,16 @@ const ProductsPage = () => {
         </select>
       </div>
       <Button onClick={() => setOpenForm(true)}>Add Product</Button>
-      {/* Table */}
-      <table className="w-full border">
-        <thead>
-          <tr className="bg-muted text-left">
-            <th className="p-2">Title</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Rating</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {products.map((product: Product) => (
-            <tr key={product.id} className="border-t">
-              <td className="p-2">{product.title}</td>
-              <td>{product.category}</td>
-              <td>₹{product.price}</td>
-              <td>{product.stock}</td>
-              <td>{product.rating}</td>
-              <td className="flex gap-2">
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => setEditingProduct(product)}
-                >
-                  Edit
-                </Button>
-
-                <Button
-                  size="sm"
-                  variant="destructive"
-                  onClick={() => setProductToDelete(product)}
-                >
-                  Delete
-                </Button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="flex justify-center items-center gap-6 flex-wrap border-2">
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            onDelete={() => setProductToDelete(product)}
+            onEdit={() => setEditingProduct(product)}
+          />
+        ))}
+      </div>
       <Dialog
         open={openForm || !!editingProduct}
         onOpenChange={() => {
@@ -143,8 +112,12 @@ const ProductsPage = () => {
         }}
       />
       {/* Pagination */}
-      <div className="flex justify-end gap-2">
-        <button disabled={page === 1} onClick={() => setPage(page - 1)}>
+      <div className="flex justify-center items-center gap-2">
+        <button
+          className="border-2 p-2 rounded-2xl"
+          disabled={page === 1}
+          onClick={() => setPage(page - 1)}
+        >
           Prev
         </button>
         <span>
@@ -153,6 +126,7 @@ const ProductsPage = () => {
         <button
           disabled={page >= total / PAGE_SIZE}
           onClick={() => setPage(page + 1)}
+          className="border-2 p-2 rounded-2xl"
         >
           Next
         </button>
