@@ -1,73 +1,183 @@
-# React + TypeScript + Vite
+# 🛍️ Product Management Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Senior Frontend Developer Assessment -- Aptech Solutions
 
-Currently, two official plugins are available:
+------------------------------------------------------------------------
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# 1️⃣ Project Overview
 
-## React Compiler
+This project is a **Product Management Dashboard**, developed as part of
+the Senior Frontend Developer assessment.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+It is a production-ready admin panel for managing an e-commerce product
+catalog. The application demonstrates:
 
-## Expanding the ESLint configuration
+-   Secure JWT-based authentication with automatic token refresh
+-   Server-side pagination, search, filtering, and sorting
+-   Full Product CRUD functionality
+-   Cloudinary image uploads with validation and progress tracking
+-   Responsive design (table → card layout for smaller screens)
+-   Global error handling with toast notifications
+-   Error boundaries for crash protection
+-   Optimistic updates using TanStack Query
+-   Strict TypeScript with zero `any` usage
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+------------------------------------------------------------------------
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+# 2️⃣ Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Core
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+-   React 18
+-   TypeScript (Strict Mode Enabled)
+-   Vite
+
+## State Management
+
+-   TanStack Query (React Query)
+-   React Context API
+-   React Hook Form
+
+## UI & Styling
+
+-   Tailwind CSS
+-   ShadCN UI
+-   Radix UI
+-   Lucide Icons
+-   Recharts
+
+## Validation
+
+-   Zod
+
+## Networking
+
+-   Axios
+-   JWT Authentication with Refresh Flow
+
+## File Upload
+
+-   Cloudinary (Unsigned Upload Preset)
+
+------------------------------------------------------------------------
+
+# 3️⃣ Setup Instructions
+
+## Clone Repository
+
+``` bash
+git clone <your-repository-url>
+cd product-dashboard
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Install Dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+``` bash
+npm install
 ```
+
+## Setup Cloudinary
+
+1.  Create account at https://cloudinary.com\
+2.  Go to Dashboard → Settings → Upload\
+3.  Create an **Unsigned Upload Preset**\
+4.  Copy Cloud Name & Upload Preset
+
+## Environment Variables
+
+Create `.env`:
+
+``` env
+VITE_API_BASE_URL=https://dummyjson.com
+VITE_CLOUDINARY_CLOUD_NAME=your_cloud_name
+VITE_CLOUDINARY_UPLOAD_PRESET=your_upload_preset
+```
+
+## Run Project
+
+``` bash
+npm run dev
+```
+
+------------------------------------------------------------------------
+
+# 4️⃣ Architecture Decisions
+
+## Folder Structure
+
+    src/
+    ├── components/
+    ├── hooks/
+    ├── services/
+    ├── lib/
+    ├── types/
+    ├── context/
+    └── pages/
+
+### Rationale
+
+-   Separation of concerns
+-   Service layer abstraction
+-   Reusable components
+-   Scalable architecture
+
+------------------------------------------------------------------------
+
+# 5️⃣ Token Refresh Implementation
+
+When a request returns **401 Unauthorized**:
+
+1.  Pause failed request
+2.  Call `/auth/refresh`
+3.  If success → Update tokens → Retry original request
+4.  If failure → Clear tokens → Redirect to login
+
+This process runs silently without user interruption.
+
+------------------------------------------------------------------------
+
+# 6️⃣ Trade-offs
+
+With more time:
+
+-   Add unit & E2E tests
+-   Improve accessibility audits
+-   Add CSV export
+-   Optimize bundle size
+-   Improve skeleton loaders
+
+------------------------------------------------------------------------
+
+# 7️⃣ Screenshots / GIF
+
+Add screenshots before submission:
+
+``` markdown
+Screenshots are attached in the mail.Please find attached mail. 
+```
+
+------------------------------------------------------------------------
+
+# 🚀 Deployment
+
+Deploy on **Vercel** or **Netlify**.
+
+### Live Demo
+
+https://product-dashboard-three-swart.vercel.app
+------------------------------------------------------------------------
+
+# 📦 Environment Variables Example
+
+``` env
+VITE_API_BASE_URL=https://dummyjson.com
+VITE_CLOUDINARY_CLOUD_NAME=dvqoswrcy
+VITE_CLOUDINARY_UPLOAD_PRESET=ml_default
+```
+
+------------------------------------------------------------------------
+
+## Author
+
+Prathmesh Deepakrao Mulhar
+Frontend Developer 
