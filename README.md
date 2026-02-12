@@ -66,7 +66,7 @@ catalog. The application demonstrates:
 ## Clone Repository
 
 ``` bash
-git clone <your-repository-url>
+git clone https://github.com/prathmeshlp/product-dashboard
 cd product-dashboard
 ```
 
@@ -87,10 +87,12 @@ npm install
 
 Create `.env`:
 
+# 📦 Environment Variables Example
+
 ``` env
 VITE_API_BASE_URL=https://dummyjson.com
-VITE_CLOUDINARY_CLOUD_NAME=your_cloud_name
-VITE_CLOUDINARY_UPLOAD_PRESET=your_upload_preset
+VITE_CLOUDINARY_CLOUD_NAME=dvqoswrcy
+VITE_CLOUDINARY_UPLOAD_PRESET=ml_default
 ```
 
 ## Run Project
@@ -167,13 +169,7 @@ Deploy on **Vercel** or **Netlify**.
 https://product-dashboard-three-swart.vercel.app
 ------------------------------------------------------------------------
 
-# 📦 Environment Variables Example
 
-``` env
-VITE_API_BASE_URL=https://dummyjson.com
-VITE_CLOUDINARY_CLOUD_NAME=dvqoswrcy
-VITE_CLOUDINARY_UPLOAD_PRESET=ml_default
-```
 
 ------------------------------------------------------------------------
 
