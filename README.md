@@ -89,10 +89,10 @@ Create `.env`:
 
 # 📦 Environment Variables Example
 
-``` env
 VITE_API_BASE_URL=https://dummyjson.com
-VITE_CLOUDINARY_CLOUD_NAME=dvqoswrcy
-VITE_CLOUDINARY_UPLOAD_PRESET=ml_default
+VITE_CLOUDINARY_CLOUD_NAME=your_cloud_name
+VITE_CLOUDINARY_UPLOAD_PRESET=your_upload_preset
+```
 ```
 
 ## Run Project
